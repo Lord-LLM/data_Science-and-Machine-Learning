@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+// Algorithm to perform post-order traversal of a binary tree
 typedef struct TreeNode {
     char data;
     struct TreeNode* left;
