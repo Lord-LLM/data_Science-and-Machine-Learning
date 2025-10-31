@@ -56,7 +56,7 @@ This network uses the **ReLU (Rectified Linear Unit)** activation for the hidden
 
 ---
 
-## 🔬 Model Evaluation
+## Model Evaluation
 
 The model's performance is measured using:
 * **Loss:** Monitored during training to ensure it is consistently decreasing.
