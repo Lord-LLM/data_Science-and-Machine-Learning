@@ -4,7 +4,7 @@
 
 Welcome to my repository documenting my journey and projects as I learn and practice Java programming!
 
-This repository contains code from two main projects I've worked on: a **Student Marksheet System** (likely `StudentMarksheet.java` and an **Invoice Generation Program** (`Main.java`).
+This repository contains code from two main projects I've worked on: a **Student Marksheet System**  and an **Invoice Generation Program** .
 
 ---
 
@@ -31,8 +31,8 @@ This project focuses on generating a formatted, console-based invoice or bill. T
 
 Through these projects, I've solidified my understanding of:
 
-* [cite_start]**Data Types and Casting:** Ensuring correct data types for calculations (e.g., using $7.0$ for average calculation to get a `double` result)[cite: 39, 56].
-* [cite_start]**Input Handling in Java:** The crucial practice of handling the newline character in the `Scanner` after reading numerical input (`nextInt()`) to prevent issues when subsequently reading line input (`nextLine()`)[cite: 38].
+  **Data Types and Casting:** Ensuring correct data types for calculations (e.g., using $7.0$ for average calculation to get a `double` result).
+  **Input Handling in Java:** The crucial practice of handling the newline character in the `Scanner` after reading numerical input (`nextInt()`) to prevent issues when subsequently reading line input (`nextLine()`).
 * **Code Structure:** Organizing code within `public class Main` and `public static void main(String[] args)`.
 * **Output Formatting:** Using simple string manipulation to create professional, tabular, and well-aligned console output.
 
