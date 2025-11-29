@@ -14,7 +14,7 @@
 
 ---
 
-## 🎯 About Me
+##  About Me
 
 ```python
 class DataScientist:
@@ -45,7 +45,7 @@ I'm passionate about leveraging AI and machine learning to solve real-world prob
 
 ---
 
-## 🚀 Featured Projects
+##  Featured Projects
 
 <table>
 <tr>
@@ -72,7 +72,7 @@ I'm passionate about leveraging AI and machine learning to solve real-world prob
 <code>Python</code> <code>Prophet</code> <code>XGBoost</code> <code>Pandas</code>
 </p>
 <p align="center">
-<a href="#">🔗 View Project</a> • <a href="#">📈 Results</a>
+<a href="#">🔗 View Project</a> • <a href="#"> Results</a>
 </p>
 </td>
 </tr>
@@ -100,7 +100,7 @@ I'm passionate about leveraging AI and machine learning to solve real-world prob
 <code>NumPy</code> <code>Pandas</code> <code>Matplotlib</code> <code>Math</code>
 </p>
 <p align="center">
-<a href="#">🔗 View Project</a> • <a href="#">📝 Blog Post</a>
+<a href="#">🔗 View Project</a> • <a href="#">Blog Post</a>
 </p>
 </td>
 </tr>
@@ -108,7 +108,7 @@ I'm passionate about leveraging AI and machine learning to solve real-world prob
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 <div align="center">
 
@@ -142,7 +142,7 @@ I'm passionate about leveraging AI and machine learning to solve real-world prob
 
 ---
 
-## 🌱 Currently Exploring
+##  Currently Exploring
 
 ```mermaid
 mindmap
@@ -169,22 +169,27 @@ mindmap
       Computer Vision
       Time Series
 ```
-
----
-
-## 📊 GitHub Analytics
+## GitHub Analytics
 
 <div align="center">
 
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=Lord-LLM&show_icons=true&theme=tokyonight&include_all_commits=true&count_private=true&hide_border=true" alt="Lord-LLM's GitHub Stats"/>
+<img height="180em" src="https://github-readme-stats.vercel.app/api?username=Lord-LLM&show_icons=true&theme=tokyonight&include_all_commits=true&hide_border=true" alt="Lord-LLM's GitHub Stats"/>
 <img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Lord-LLM&layout=compact&langs_count=8&theme=tokyonight&hide_border=true" alt="Top Languages"/>
 <br><br>
 <img height="180em" src="https://github-readme-streak-stats.herokuapp.com/?user=Lord-LLM&theme=tokyonight&hide_border=true" alt="GitHub Streak"/>
 </div>
 
+##  WakaTime Metrics
+
+<div align="center">
+
+<img height="180em" src="https://github-readme-stats.vercel.app/api/wakatime?username=Lord-LLM&theme=tokyonight&layout=compact&langs_count=8&hide_border=true" alt="WakaTime Stats" />
+
+</div>
+
 ---
 
-## 🏆 Achievements
+##  Achievements
 
 <div align="center">
 
@@ -194,18 +199,18 @@ mindmap
 
 ---
 
-## 📝 Latest Blog Posts
+##  Latest Blog Posts
 
 <!-- BLOG-POST-LIST:START -->
-- 🤖 Building RAG Systems: A Practical Guide
-- 📊 Time Series Forecasting with Prophet
-- 🧠 Understanding Transformers from Scratch
-- 🚀 Deploying ML Models with FastAPI
+- Building RAG Systems: A Practical Guide
+-  Time Series Forecasting with Prophet
+- Understanding Transformers from Scratch
+-  Deploying ML Models with FastAPI
 <!-- BLOG-POST-LIST:END -->
 
 ---
 
-## 📫 Let's Connect
+##  Let's Connect
 
 <div align="center">
 
@@ -220,11 +225,11 @@ mindmap
 
 <div align="center">
   
-### 💭 Random Dev Quote
+### Random Dev Quote
 
 <img src="https://quotes-github-readme.vercel.app/api?type=horizontal&theme=tokyonight" alt="Random Dev Quote"/>
 
-### 📈 Profile Views
+###  Profile Views
 
 <img src="https://komarev.com/ghpvc/?username=Lord-LLM&color=blueviolet&style=for-the-badge" alt="Profile Views"/>
 
@@ -232,8 +237,8 @@ mindmap
 
 <img src="https://raw.githubusercontent.com/Trilokia/Trilokia/379277808c61ef204768a61bbc5d25bc7798ccf1/bottom_header.svg" />
 
-*✨ "Data is the new oil, but insights are the new gold." ⭐*
+*"Data is the new oil, but insights are the new gold." *
 
-**Thanks for visiting! Let's turn data into action.** 🚀
+**Thanks for visiting! Let's turn data into action.** 
 
 </div>
