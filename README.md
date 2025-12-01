@@ -2,7 +2,7 @@
 
 # Hi there, I'm Enock 👋
 
-### Data Scientist | ML Engineer | AI Enthusiast
+### AI Engineer
 
 *Building intelligent systems and exploring the intersection of data and AI*
 
