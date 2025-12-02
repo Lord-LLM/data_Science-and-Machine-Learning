@@ -1,12 +1,10 @@
 import streamlit as st
 from pyDatalog import pyDatalog
 
-# --- CRITICAL FIX: RESET LOGIC ENGINE ON EVERY RUN ---
-# Streamlit runs on multiple threads. pyDatalog is thread-local.
-# We must clear and rebuild the KB every time to avoid the "_thread._local" error.
+
 pyDatalog.clear()
 
-# --- 1. DECLARE TERMS ---
+# 1. DECLARE TERMS 
 pyDatalog.create_terms('Pest, Chemical, Disease, Tool, Control, Group, RuleName, Symptom, Plant, S1, S2, D, P, S')
 pyDatalog.create_terms('pest, disease, insecticide, miticide, fungicide, natural_solution')
 pyDatalog.create_terms('biopesticide, biocontrol, controls_pest, controls_disease, has_irac_group')
@@ -26,9 +24,9 @@ pyDatalog.create_terms('root_related_disease, fruit_disease')
 pyDatalog.create_terms('pest_basic, pesticide_basic, controls_basic, type_basic, category_basic')
 pyDatalog.create_terms('effective_basic, organic_option_basic, fungal_treatment_basic')
 
-# --- 2. LOAD FACTS (REMOVED SESSION STATE GUARD) ---
+#2. LOAD FACTS (REMOVED SESSION STATE GUARD) 
 
-# --- GROUP 16: DISEASES & SYMPTOMS ---
+# GROUP 16: DISEASES & SYMPTOMS 
 diseases = [
     "root_rot", "anthracnose", "sunblotch", "verticillium_wilt",
     "scab", "sooty_mold", "avocado_black_streak", "phytophthora_canker",
@@ -64,7 +62,7 @@ for dis, syms in causes_data.items():
     for sym in syms:
         pyDatalog.assert_fact('causes', dis, sym)
 
-# --- FACTS: PESTS ---
+# FACTS: PESTS -
 pests = [
     'avocado_thrips', 'boring_beetles', 'ambrosia_beetles',
     'polyphagous_shothole_borer', 'avocado_lace_bug', 'mites',
@@ -86,7 +84,7 @@ for insect in insecticides:
 
 pyDatalog.assert_fact('miticide', 'spirodiclofen')
 
-# --- FACTS: FUNGICIDES ---
+# FACTS: FUNGICIDES -
 fungicides = [
     'phosphonates', 'fosetyl_al', 'potassium_phosphite', 'metalaxyl',
     'propiconazole', 'copper', 'azoxystrobin', 'strobilurin', 'prochloraz'
@@ -94,7 +92,7 @@ fungicides = [
 for fung in fungicides:
     pyDatalog.assert_fact('fungicide', fung)
 
-# --- FACTS: BIOLOGICALS ---
+#  FACTS: BIOLOGICALS 
 natural_sols = ['horticultural_oil', 'insecticidal_soap', 'neem_oil', 'wettable_sulfur']
 for sol in natural_sols:
     pyDatalog.assert_fact('natural_solution', sol)
@@ -107,7 +105,7 @@ biocontrols = ['predatory_mites', 'parasitic_wasps', 'generalist_predators']
 for bc in biocontrols:
     pyDatalog.assert_fact('biocontrol', bc)
 
-# --- ASSOCIATIONS: PEST CONTROLS ---
+# ASSOCIATIONS: PEST CONTROLS 
 pest_controls = [
     ('abamectin', 'avocado_thrips'), ('spinetoram', 'avocado_thrips'),
     ('spinosad', 'avocado_thrips'), ('spirotetramat', 'avocado_thrips'),
@@ -128,7 +126,7 @@ pest_controls = [
 for chem, pest_name in pest_controls:
     pyDatalog.assert_fact('controls_pest', chem, pest_name)
 
-# --- ASSOCIATIONS: DISEASE CONTROLS ---
+# ASSOCIATIONS: DISEASE CONTROLS 
 disease_controls = [
     ('phosphonates', 'phytophthora_root_rot'), ('metalaxyl', 'phytophthora_root_rot'),
     ('cultural_control_mulch', 'phytophthora_root_rot'),
@@ -142,7 +140,7 @@ disease_controls = [
 for chem, dis in disease_controls:
     pyDatalog.assert_fact('controls_disease', chem, dis)
 
-# --- PROPERTIES ---
+#  PROPERTIES 
 irac_groups = [
     ('abamectin', '6'), ('emamectin_benzoate', '6'), ('spinosad', '5'),
     ('spinetoram', '5'), ('spirotetramat', '23'), ('spirodiclofen', '23'),
@@ -182,7 +180,7 @@ pyDatalog.assert_fact('is_post_harvest', 'prochloraz')
 pyDatalog.assert_fact('is_selective', 'bt')
 pyDatalog.assert_fact('is_non_selective', 'horticultural_oil')
 
-# --- ORGANIC & IPM FACTS ---
+# ORGANIC & IPM FACTS 
 organic_items = ['spinosad', 'sabadilla', 'pyrethrin', 'horticultural_oil',
                  'wettable_sulfur', 'bt', 'neem_oil', 'insecticidal_soap']
 for item in organic_items:
@@ -193,7 +191,7 @@ ipm_tools = ['bt', 'horticultural_oil', 'insecticidal_soap', 'neem_oil',
 for tool in ipm_tools:
     pyDatalog.assert_fact('is_ipm_tool', tool)
 
-# --- DEFINE RULES (RUN EVERY TIME) ---
+#  DEFINE RULES (RUN EVERY TIME) 
 find_pest_control(Pest, Chemical) <= pest(Pest) & controls_pest(Chemical, Pest)
 find_disease_control(Disease, Chemical) <= disease(Disease) & controls_disease(Chemical, Disease)
 is_ipm_choice(Tool) <= is_ipm_tool(Tool)
@@ -204,7 +202,7 @@ is_organic_control(Control) <= is_organic(Control)
 get_irac_group(Chemical, Group) <= has_irac_group(Chemical, Group)
 get_frac_group(Chemical, Group) <= has_frac_group(Chemical, Group)
 
-# --- STREAMLIT UI ---
+#  STREAMLIT UI 
 st.set_page_config(page_title="Avocado Pest KB", page_icon="🥑", layout="wide")
 st.title("🥑 Avocado Pest & Disease Knowledge Base")
 st.write("An expert system using Datalog to find control methods for avocado cultivation.")
@@ -232,7 +230,7 @@ if all_pests:
         
         st.write(f"**Controls for {selected_pest.replace('_', ' ').title()}:**")
         if pest_controls_result:
-            # FIX: Use c[0] instead of c[1] because the pest name is not returned in the result
+    
             controls = [{"Control Method": c[0].replace('_', ' ').title()} for c in pest_controls_result]
             st.dataframe(controls, use_container_width=True, hide_index=True)
         else:
@@ -262,7 +260,7 @@ if all_diseases:
         
         st.write(f"**Controls for {selected_disease.replace('_', ' ').title()}:**")
         if disease_controls_result:
-            # FIX: Use c[0] instead of c[1]
+            #
             controls = [{"Control Method": c[0].replace('_', ' ').title()} for c in disease_controls_result]
             st.dataframe(controls, use_container_width=True, hide_index=True)
         else:
@@ -278,7 +276,6 @@ col1, col2, col3 = st.columns(3)
 
 if col1.button("🌱 Organic Controls", key='organic_btn'):
     try:
-        # Here we query is_organic_control(Control). Control is a Variable. Result has 1 item.
         organic_query = is_organic_control(Control)
         results = organic_query.data if hasattr(organic_query, 'data') and organic_query.data else []
         if results:
@@ -350,7 +347,7 @@ if all_chemicals:
         props_found = False
         
         if irac_result:
-            # FIX: Use [0][0] instead of [0][1]
+            #
             st.info(f"🎯 **IRAC Group:** {irac_result[0][0]}")
             props_found = True
         if frac_result:
