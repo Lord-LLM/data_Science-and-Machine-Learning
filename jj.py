@@ -213,6 +213,7 @@ st.write("An expert system using Datalog to find control methods for avocado cul
 st.header("1. Find Pest Controls")
 
 try:
+    # Query all pests to populate the dropdown
     all_pests_query = pest(Pest)
     all_pests_result = all_pests_query.data if hasattr(all_pests_query, 'data') and all_pests_query.data else []
     all_pests = sorted([p[0] for p in all_pests_result])
@@ -224,12 +225,15 @@ if all_pests:
     selected_pest = st.selectbox("Select a Pest:", options=all_pests, key='pest_select')
     
     try:
+        # Query: find_pest_control('specific_pest', Variable)
+        # Result format: [('chemical_name',), ('another_chemical',)] -> Only 1 item per tuple!
         pest_controls_query = find_pest_control(selected_pest, Chemical)
         pest_controls_result = pest_controls_query.data if hasattr(pest_controls_query, 'data') and pest_controls_query.data else []
         
         st.write(f"**Controls for {selected_pest.replace('_', ' ').title()}:**")
         if pest_controls_result:
-            controls = [{"Control Method": c[1].replace('_', ' ').title()} for c in pest_controls_result]
+            # FIX: Use c[0] instead of c[1] because the pest name is not returned in the result
+            controls = [{"Control Method": c[0].replace('_', ' ').title()} for c in pest_controls_result]
             st.dataframe(controls, use_container_width=True, hide_index=True)
         else:
             st.info("No controls found in the knowledge base.")
@@ -258,7 +262,8 @@ if all_diseases:
         
         st.write(f"**Controls for {selected_disease.replace('_', ' ').title()}:**")
         if disease_controls_result:
-            controls = [{"Control Method": c[1].replace('_', ' ').title()} for c in disease_controls_result]
+            # FIX: Use c[0] instead of c[1]
+            controls = [{"Control Method": c[0].replace('_', ' ').title()} for c in disease_controls_result]
             st.dataframe(controls, use_container_width=True, hide_index=True)
         else:
             st.info("No controls found in the knowledge base.")
@@ -273,6 +278,7 @@ col1, col2, col3 = st.columns(3)
 
 if col1.button("🌱 Organic Controls", key='organic_btn'):
     try:
+        # Here we query is_organic_control(Control). Control is a Variable. Result has 1 item.
         organic_query = is_organic_control(Control)
         results = organic_query.data if hasattr(organic_query, 'data') and organic_query.data else []
         if results:
@@ -329,6 +335,7 @@ if all_chemicals:
     selected_chemical = st.selectbox("Select a Chemical:", options=all_chemicals, key='chemical_select')
     
     try:
+        # When querying properties of a KNOWN chemical, the result only contains the property value (Index 0)
         irac_query = get_irac_group(selected_chemical, Group)
         frac_query = get_frac_group(selected_chemical, Group)
         systemic_query = is_systemic(selected_chemical)
@@ -343,10 +350,12 @@ if all_chemicals:
         props_found = False
         
         if irac_result:
-            st.info(f"🎯 **IRAC Group:** {irac_result[0][1]}")
+            # FIX: Use [0][0] instead of [0][1]
+            st.info(f"🎯 **IRAC Group:** {irac_result[0][0]}")
             props_found = True
         if frac_result:
-            st.info(f"🎯 **FRAC Group:** {frac_result[0][1]}")
+            # FIX: Use [0][0] instead of [0][1]
+            st.info(f"🎯 **FRAC Group:** {frac_result[0][0]}")
             props_found = True
         if systemic_result:
             st.success("✅ **Systemic:** Yes")
