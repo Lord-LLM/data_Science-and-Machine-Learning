@@ -1,31 +1,30 @@
 import streamlit as st
 from pyDatalog import pyDatalog
 
-# Initialize pyDatalog only once using session state
+# --- 1. DECLARE TERMS (MUST RUN EVERY TIME) ---
+# This ensures Python knows what 'Pest', 'Chemical', etc. are on every rerun.
+pyDatalog.create_terms('Pest, Chemical, Disease, Tool, Control, Group, RuleName, Symptom, Plant, S1, S2, D, P, S')
+pyDatalog.create_terms('pest, disease, insecticide, miticide, fungicide, natural_solution')
+pyDatalog.create_terms('biopesticide, biocontrol, controls_pest, controls_disease, has_irac_group')
+pyDatalog.create_terms('has_frac_group, is_systemic, is_translaminar, is_contact, is_stomach_poison')
+pyDatalog.create_terms('is_protectant, is_fungistat, is_post_harvest, is_selective, is_non_selective')
+pyDatalog.create_terms('application_method, is_organic, is_ipm_tool, find_pest_control')
+pyDatalog.create_terms('find_disease_control, is_ipm_choice, is_biological_or_natural')
+pyDatalog.create_terms('is_organic_control, is_high_resistance_risk, get_irac_group, get_frac_group')
+pyDatalog.create_terms('resistance_management_strategy, preferred_application, high_risk_application')
+pyDatalog.create_terms('is_fungicide_protectant, is_physical_control, ipm_cultural_rule')
+pyDatalog.create_terms('resistance_rule, application_rule, fungicide_rule, ipm_rule')
+pyDatalog.create_terms('sanitation, natural_enemies, cultural_control_mulch')
+pyDatalog.create_terms('cultural_control_drainage, cultural_control_gypsum')
+pyDatalog.create_terms('cultural_control_pruning, trichogramma, spinosyns')
+pyDatalog.create_terms('fungal_disease, causes, has_symptom, has_disease, likely_disease')
+pyDatalog.create_terms('root_related_disease, fruit_disease')
+pyDatalog.create_terms('pest_basic, pesticide_basic, controls_basic, type_basic, category_basic')
+pyDatalog.create_terms('effective_basic, organic_option_basic, fungal_treatment_basic')
+
+# --- 2. INITIALIZE LOGIC (RUN ONCE) ---
 if 'kb_initialized' not in st.session_state:
     pyDatalog.clear()
-    
-    # Declare ALL terms upfront
-    pyDatalog.create_terms('Pest, Chemical, Disease, Tool, Control, Group, RuleName, Symptom, Plant, S1, S2, D, P, S')
-    
-    # Declare ALL predicates
-    pyDatalog.create_terms('pest, disease, insecticide, miticide, fungicide, natural_solution')
-    pyDatalog.create_terms('biopesticide, biocontrol, controls_pest, controls_disease, has_irac_group')
-    pyDatalog.create_terms('has_frac_group, is_systemic, is_translaminar, is_contact, is_stomach_poison')
-    pyDatalog.create_terms('is_protectant, is_fungistat, is_post_harvest, is_selective, is_non_selective')
-    pyDatalog.create_terms('application_method, is_organic, is_ipm_tool, find_pest_control')
-    pyDatalog.create_terms('find_disease_control, is_ipm_choice, is_biological_or_natural')
-    pyDatalog.create_terms('is_organic_control, is_high_resistance_risk, get_irac_group, get_frac_group')
-    pyDatalog.create_terms('resistance_management_strategy, preferred_application, high_risk_application')
-    pyDatalog.create_terms('is_fungicide_protectant, is_physical_control, ipm_cultural_rule')
-    pyDatalog.create_terms('resistance_rule, application_rule, fungicide_rule, ipm_rule')
-    pyDatalog.create_terms('sanitation, natural_enemies, cultural_control_mulch')
-    pyDatalog.create_terms('cultural_control_drainage, cultural_control_gypsum')
-    pyDatalog.create_terms('cultural_control_pruning, trichogramma, spinosyns')
-    pyDatalog.create_terms('fungal_disease, causes, has_symptom, has_disease, likely_disease')
-    pyDatalog.create_terms('root_related_disease, fruit_disease')
-    pyDatalog.create_terms('pest_basic, pesticide_basic, controls_basic, type_basic, category_basic')
-    pyDatalog.create_terms('effective_basic, organic_option_basic, fungal_treatment_basic')
     
     # --- GROUP 16: DISEASES & SYMPTOMS ---
     diseases = [
@@ -192,35 +191,10 @@ if 'kb_initialized' not in st.session_state:
     for tool in ipm_tools:
         pyDatalog.assert_fact('is_ipm_tool', tool)
     
-    # --- DEFINE RULES (must come AFTER all predicates are created) ---
-    # Access term objects directly from pyDatalog.terms
-    Pest = pyDatalog.terms.Pest
-    Chemical = pyDatalog.terms.Chemical
-    Disease = pyDatalog.terms.Disease
-    Control = pyDatalog.terms.Control
-    Tool = pyDatalog.terms.Tool
-    Group = pyDatalog.terms.Group
+    # --- DEFINE RULES ---
+    # Note: We do NOT need to assign from pyDatalog.terms here.
+    # The variables (Pest, Chemical) are already in scope from Step 1.
     
-    pest = pyDatalog.terms.pest
-    disease = pyDatalog.terms.disease
-    controls_pest = pyDatalog.terms.controls_pest
-    controls_disease = pyDatalog.terms.controls_disease
-    find_pest_control = pyDatalog.terms.find_pest_control
-    find_disease_control = pyDatalog.terms.find_disease_control
-    is_ipm_tool = pyDatalog.terms.is_ipm_tool
-    is_ipm_choice = pyDatalog.terms.is_ipm_choice
-    natural_solution = pyDatalog.terms.natural_solution
-    biopesticide = pyDatalog.terms.biopesticide
-    biocontrol = pyDatalog.terms.biocontrol
-    is_biological_or_natural = pyDatalog.terms.is_biological_or_natural
-    is_organic = pyDatalog.terms.is_organic
-    is_organic_control = pyDatalog.terms.is_organic_control
-    has_irac_group = pyDatalog.terms.has_irac_group
-    has_frac_group = pyDatalog.terms.has_frac_group
-    get_irac_group = pyDatalog.terms.get_irac_group
-    get_frac_group = pyDatalog.terms.get_frac_group
-    
-    # Define rules using the term objects
     find_pest_control(Pest, Chemical) <= pest(Pest) & controls_pest(Chemical, Pest)
     find_disease_control(Disease, Chemical) <= disease(Disease) & controls_disease(Chemical, Disease)
     is_ipm_choice(Tool) <= is_ipm_tool(Tool)
@@ -233,27 +207,7 @@ if 'kb_initialized' not in st.session_state:
     
     st.session_state.kb_initialized = True
 
-# --- ACCESS TERMS FOR QUERYING ---
-pest = pyDatalog.terms.pest
-disease = pyDatalog.terms.disease
-insecticide = pyDatalog.terms.insecticide
-fungicide = pyDatalog.terms.fungicide
-Chemical = pyDatalog.terms.Chemical
-Pest = pyDatalog.terms.Pest
-Disease = pyDatalog.terms.Disease
-Control = pyDatalog.terms.Control
-Tool = pyDatalog.terms.Tool
-Group = pyDatalog.terms.Group
 
-find_pest_control = pyDatalog.terms.find_pest_control
-find_disease_control = pyDatalog.terms.find_disease_control
-is_organic_control = pyDatalog.terms.is_organic_control
-is_ipm_choice = pyDatalog.terms.is_ipm_choice
-is_biological_or_natural = pyDatalog.terms.is_biological_or_natural
-get_irac_group = pyDatalog.terms.get_irac_group
-get_frac_group = pyDatalog.terms.get_frac_group
-is_systemic = pyDatalog.terms.is_systemic
-is_organic = pyDatalog.terms.is_organic
 
 # --- STREAMLIT UI ---
 st.set_page_config(page_title="Avocado Pest KB", page_icon="🥑", layout="wide")
