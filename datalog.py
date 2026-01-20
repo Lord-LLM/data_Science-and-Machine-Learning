@@ -392,31 +392,6 @@ def load_kb():
 
     +controls_disease('copperfungicide', 'rootrotphytophthora')
 
-    # IRAC / FRAC GROUPS (RESISTANCE)
-    +has_irac_group('abamectin', '6')
-    +has_irac_group('emamectin_benzoate', '6')
-    +has_irac_group('spinosad', '5')
-    +has_irac_group('spinetoram', '5')
-    +has_irac_group('spirotetramat', '23')
-    +has_irac_group('spirodiclofen', '23')
-    +has_irac_group('imidacloprid', '4A')
-    +has_irac_group('dinotefuran', '4A')
-    +has_irac_group('pyrethroids', '3A')
-    +has_irac_group('permethrin', '3A')
-    +has_irac_group('bifenthrin', '3A')
-    +has_irac_group('fenpropathrin', '3A')
-    +has_irac_group('pyrethrin', '3A')
-    +has_irac_group('malathion', '1B')
-    +has_irac_group('bt', '11A')
-    +has_irac_group('sabadilla', 'UN')
-
-    +has_frac_group('phosphonates', 'P07')
-    +has_frac_group('metalaxyl', '4')
-    +has_frac_group('propiconazole', '3')
-    +has_frac_group('prochloraz', '3')
-    +has_frac_group('copper', 'M01')
-    +has_frac_group('azoxystrobin', '11')
-    +has_frac_group('strobilurin', '11')
 
 
     # CHEMICAL ATTRIBUTES
@@ -470,27 +445,6 @@ def load_kb():
     +is_organic('azadirachtin')
     +is_organic('mineraloil')
     +is_organic('bacillusthuringiensis')
-
-    # IPM tools
-    +is_ipm_tool('bt')
-    +is_ipm_tool('horticultural_oil')
-    +is_ipm_tool('insecticidal_soap')
-    +is_ipm_tool('neem_oil')
-    +is_ipm_tool('predatory_mites')
-    +is_ipm_tool('parasitic_wasps')
-    +is_ipm_tool('beauveria_bassiana')
-
-
-    # BASE RULES
-    +resistance_rule('r1', 'Rotate between different IRAC/FRAC Modes of Action.')
-
-    +application_rule('r1', 'Foliar sprays pose high risk to beneficials.')
-
-    +fungicide_rule('r1', 'Most fungicides are protectants, not curatives.')
-
-    +ipm_rule('r4', 'Dust control is critical for conserving natural enemies.')
-    +ipm_rule('r5', 'Ants must be controlled as they protect pests.')
-
     pyDatalog.create_terms('C, G')
 
     # LOGIC RULES
@@ -502,36 +456,6 @@ def load_kb():
         fungal_disease(Disease) & controls_disease(Chemical, Disease)
     )
 
-    is_ipm_choice(Tool) <= is_ipm_tool(Tool)
-
-    is_biological_or_natural(C) <= natural_solution(C)
-    is_biological_or_natural(C) <= biopesticide(C)
-    is_biological_or_natural(C) <= biocontrol(C)
-
-    is_organic_control(C) <= is_organic(C)
-
-    is_high_resistance_risk(C) <= has_irac_group(C, '6')
-    is_high_resistance_risk(C) <= has_irac_group(C, '5')
-    is_high_resistance_risk(C) <= has_frac_group(C, '11')
-
-    get_irac_group(C, G) <= has_irac_group(C, G)
-    get_frac_group(C, G) <= has_frac_group(C, G)
-
-    resistance_management_strategy('rotate_moa_groups') <= \
-        resistance_rule('r1', 'Rotate between different IRAC/FRAC Modes of Action.')
-
-    preferred_application(C, 'trunk_injection') <= (is_systemic(C) & insecticide(C))
-    preferred_application(C, 'trunk_injection') <= (is_systemic(C) & fungicide(C))
-
-
-    high_risk_application('foliar_spray') <= \
-        application_rule('r1', 'Foliar sprays pose high risk to beneficials.')
-
-    ipm_cultural_rule('dust_control') <= \
-        ipm_rule('r4', 'Dust control is critical for conserving natural enemies.')
-
-    ipm_cultural_rule('ant_control') <= \
-        ipm_rule('r5', 'Ants must be controlled as they protect pests.')
     
     return {
         "symptoms": symptoms,
