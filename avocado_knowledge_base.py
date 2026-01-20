@@ -30,12 +30,7 @@ pyDatalog.create_terms('effective_basic, organic_option_basic, fungal_treatment_
 diseases = [
     "root_rot", "anthracnose", "sunblotch", "verticillium_wilt",
     "scab", "sooty_mold", "avocado_black_streak", "phytophthora_canker",
-    "armillaria_root_rot", "dothiorella_fruit_rot", "colletotrichum_gloeosporioides_rot",
-    "laurel_wilt", "powdery_mildew", "fusarium_dieback", "algal_leaf_spot",
-    "bacterial_spot", "stem_end_rot", "rhizoctonia_root_rot", "fruit_spot",
-    "avocado_cercospora", "pink_disease", "branch_canker", "botryosphaeria_canker",
-    "black_mold_rot", "sclerotinia_rot", "seed_rot", "avocado_declinine",
-    "nutrient_deficiency_chlorosis", "manganese_toxicity", "salt_stress",
+    "armillaria_root_rot", "laurel_wilt", "powdery_mildew", "fusarium_dieback",
     "phytophthora_root_rot", "cercospora_spot"
 ]
 
@@ -66,9 +61,7 @@ for dis, syms in causes_data.items():
 pests = [
     'avocado_thrips', 'boring_beetles', 'ambrosia_beetles',
     'polyphagous_shothole_borer', 'avocado_lace_bug', 'mites',
-    'persea_mite', 'avocado_brown_mite', 'sixspotted_mite',
-    'caterpillars', 'western_avocado_leafroller', 'omnivorous_looper',
-    'scale_insects', 'greenhouse_thrips'
+    'persea_mite', 'caterpillars', 'scale_insects'
 ]
 for p in pests:
     pyDatalog.assert_fact('pest', p)
@@ -135,10 +128,182 @@ disease_controls = [
     ('propiconazole', 'laurel_wilt'), ('sanitation', 'laurel_wilt'),
     ('copper', 'anthracnose'), ('azoxystrobin', 'anthracnose'),
     ('prochloraz', 'anthracnose'), ('cultural_control_pruning', 'anthracnose'),
-    ('copper', 'cercospora_spot')
+    ('copper', 'cercospora_spot'), ("root_rot", "favorable_soil_conditions"),
+    ("root_rot", "certified_disease_free_nursery_stock"),
+    ("root_rot", "resistant_rootstocks"),
+    ("root_rot", "prevent_soil_movement"),
+    ("root_rot", "irrigation_management"),
+    ("root_rot", "mulch"),
+    ("root_rot", "gypsum"),
+    ("root_rot", "phosphonates"),
+    ("root_rot", "fosetyl_al"),
+    ("root_rot", "potassium_phosphite"),
+    ("root_rot", "metalaxyl"),
+    ("sunblotch", "remove_infected_trees"),
+    ("sunblotch", "certified_disease_free_stock"),
+    ("sunblotch", "disinfect_tools"),
+    ("sunblotch", "stump_treatment_with_herbicide"),
+    ("sunblotch", "avoid_grafting_from_infected"),
+    ("verticillium_wilt", "prune_dead_branches"),
+    ("verticillium_wilt", "optimal_irrigation"),
+    ("verticillium_wilt", "fertilization"),
+    ("verticillium_wilt", "plant_mexican_rootstocks"),
+    ("verticillium_wilt", "remove_dead_trees"),
+    ("verticillium_wilt", "sterilize_tools"),
+    ("verticillium_wilt", "benomyl"),
+    ("verticillium_wilt", "azoxystrobin"),
+    ("verticillium_wilt", "captan"),
+    ("verticillium_wilt", "thiram"),
+    ("verticillium_wilt", "carbendazim"),
+    ("verticillium_wilt", "trifloxystrobin"),
+    ("scab", "copper_fungicide"),
+    ("scab", "sulfur"),
+    ("scab", "pruning"),
+    ("scab", "resistant_varieties"),
+    ("scab", "avoid_overhead_irrigation"),
+    ("scab", "benomyl"),
+    ("scab", "copper_oxychloride"),
+    ("scab", "copper_hydroxide"),
+    ("scab", "sulfur_plus_copper_sulfate"),
+    ("sooty_mold", "control_honeydew_insects"),
+    ("sooty_mold", "horticultural_oil"),
+    ("sooty_mold", "insecticidal_soap"),
+    ("sooty_mold", "neem_oil"),
+    ("sooty_mold", "wash_with_detergent"),
+    ("sooty_mold", "liquid_copper_fungicide"),
+    ("sooty_mold", "selective_insecticides"),
+    ("avocado_black_streak", "good_fertilizer"),
+    ("avocado_black_streak", "irrigation_practices"),
+    ("avocado_black_streak", "prevent_stress"),
+    ("avocado_black_streak", "remove_diseased_parts"),
+    ("avocado_black_streak", "high_quality_water"),
+    ("phytophthora_canker", "favorable_soil_conditions"),
+    ("phytophthora_canker", "certified_disease_free_stock"),
+    ("phytophthora_canker", "pruning_tools_disinfection"),
+    ("phytophthora_canker", "cut_out_infected_tissue"),
+    ("phytophthora_canker", "phosphonates"),
+    ("phytophthora_canker", "fosetyl_al"),
+    ("phytophthora_canker", "potassium_phosphonate"),
+    ("phytophthora_canker", "metalaxyl"),
+    ("phytophthora_canker", "avoid_wetting_trunks"),
+    ("armillaria_root_rot", "good_drainage"),
+    ("armillaria_root_rot", "avoid_excess_irrigation"),
+    ("armillaria_root_rot", "remove_infected_trees"),
+    ("armillaria_root_rot", "remove_stumps"),("armillaria_root_rot", "fumigation"),
+    ("armillaria_root_rot", "air_drying_roots"),("armillaria_root_rot", "gypsum"),
+    ("armillaria_root_rot", "phosphonates"),
+    ("powdery_mildew", "sulfur"),("powdery_mildew", "neem_oil"),
+    ("powdery_mildew", "potassium_bicarbonate"),("powdery_mildew", "baking_soda_solution"),
+    ("powdery_mildew", "prune_affected_parts"),("powdery_mildew", "avoid_overhead_watering"),
+    ("powdery_mildew", "horticultural_oil"),("powdery_mildew", "lime_sulfur"),
+    ("fusarium_dieback", "remove_infested_branches"),("fusarium_dieback", "chip_wood_onsite"),
+    ("fusarium_dieback", "solarize_branches"),("fusarium_dieback", "sterilize_tools"),
+    ("fusarium_dieback", "avoid_moving_infested_material"),("fusarium_dieback", "tebuconazole"),
+    ("fusarium_dieback", "carbendazim"),("fusarium_dieback", "debacarb"),
+    ("fusarium_dieback", "metconazole"),("fusarium_dieback", "emamectin_benzoate"),
+    ("fusarium_dieback", "propiconazole"),("fusarium_dieback", "bifenthrin")
 ]
 for chem, dis in disease_controls:
     pyDatalog.assert_fact('controls_disease', chem, dis)
+
+# ADMINISTRATION INSTRUCTIONS (SIMPLE FOR FARMERS)
+admin_instructions = {
+    'abamectin': 'Apply as foliar spray: 10-20 fl oz/acre in 100+ gal water. Use ground or air equipment. Repeat every 7-10 days if needed. Wear PPE (gloves, eyewear, coveralls). Avoid bees; apply evenings. Wash hands after use. Store in cool, dry place away from children.',
+    'spinetoram': 'Apply 5-10 oz/acre as foliar spray. Target eggs/larvae. Repeat every 7-14 days. Max 2 apps/season. Use with oil if specified. Wear PPE. Apply in calm weather; avoid drift to bees. Store securely.',
+    'spinosad': 'Mix 1-2 oz/gal water; spray to wet leaves. Apply every 7-10 days. Safe for organics; max 6 apps/year. Wear PPE. Apply evenings to avoid bees. Wash produce before eating.',
+    'spirotetramat': 'Apply 8-10 fl oz/acre foliar in 100+ gal water. Repeat after 14 days if needed. Max 25 oz/year. Wear PPE. Avoid runoff. Store in original container.',
+    'imidacloprid': 'Apply 8-16 fl oz/acre as soil drench or foliar. Dilute in 100+ gal water. Max 0.5 lb AI/year. Wear PPE. Avoid bees and water bodies.',
+    'dinotefuran': 'Trunk injection: 0.1-0.4 g/tree. Soil drench: 0.2-0.4 lb AI/acre. Consult expert for dosing. Wear PPE. Restricted in some areas; check local regs.',
+    'sabadilla': 'Apply as dust or spray: 1-2 lb/acre. Stomach poison; repeat as needed. Wear PPE. Limited data; use cautiously.',
+    'emamectin_benzoate': 'Apply 3-6 oz/acre foliar. Mix with water; spray every 7-14 days. Max 2 apps/season. Wear PPE. Apply evenings.',
+    'pyrethroids': 'Apply 2-8 oz/acre foliar. Repeat every 7-10 days. Avoid bees; apply evenings. Wear PPE.',
+    'permethrin': 'Apply 4-8 oz/acre foliar in 25-400 gal water. Repeat as needed; max per label. Wear PPE.',
+    'bifenthrin': 'Apply 0.04-0.2 lb AI/acre foliar in 50+ gal water. Repeat every 7-14 days. Wear PPE. Avoid water bodies.',
+    'malathion': 'Apply 1-1.5 pt/acre foliar in 25-400 gal water. Repeat every 7-10 days. Wear PPE.',
+    'fenpropathrin': 'Apply 16-21 fl oz/acre in 75+ gal water. Max 2 apps/season. Evening application. Wear PPE. Avoid bees.',
+    'pyrethrin': 'Apply 1-4 oz/gal water; spray to wet. Repeat every 5-7 days. Organic option. Wear PPE.',
+    'spirodiclofen': 'Apply 18-20 fl oz/acre foliar in 50+ gal water. One app/season. Early infestation. Wear PPE.',
+    'phosphonates': 'Apply as soil drench or foliar: 1-3 qt/100 gal. Repeat every 2-4 weeks. Wear PPE.',
+    'fosetyl_al': 'Apply 2-5 lb/acre foliar or drench. Repeat every 30-60 days. Buffer for injection. Wear PPE.',
+    'potassium_phosphite': 'Apply 2-4 L/ha foliar or injection. Every 4-6 weeks during root flushes. Wear PPE.',
+    'metalaxyl': 'Apply 1-4 qt/acre soil drench. Incorporate; repeat 8-12 weeks. Wear PPE.',
+    'propiconazole': 'Apply 6-8 fl oz/acre foliar. Repeat every 14-21 days. Max 4 apps/year. Wear PPE.',
+    'copper': 'Apply 2-4 lb/acre foliar. Every 7-14 days during wet weather. Wear PPE.',
+    'azoxystrobin': 'Apply 6-12 fl oz/acre foliar. Every 14-28 days. Max 3 apps/year. Wear PPE.',
+    'strobilurin': 'Apply 0.1-0.25 lb AI/acre. Rotate groups. Every 14-28 days. Wear PPE.',
+    'prochloraz': 'Apply 0.2-0.4 lb/acre post-harvest dip or spray. 30-60 sec contact. Wear PPE.',
+    'horticultural_oil': 'Mix 1-2% v/v; spray to wet. Every 7-14 days. Avoid hot sun. Wear PPE.',
+    'insecticidal_soap': 'Mix 1-2 tbsp/gal; spray undersides. Every 4-7 days. Test first. Wear PPE.',
+    'neem_oil': 'Mix 1 tbsp/gal + soap; spray every 7-14 days. Evening application. Wear PPE.',
+    'wettable_sulfur': 'Apply 2-30 lb/acre dust or spray. Every 7-10 days. Avoid >90°F. Wear PPE.',
+    'bt': 'Apply 0.5-2 lb/acre; spray young larvae. Every 7 days. Wear PPE.',
+    'beauveria_bassiana': 'Apply 1-2 lb/acre foliar. Every 7-14 days. Humid conditions. Wear PPE.',
+    # Cultural controls (non-chemical)
+    'sanitation': 'Remove and destroy infected plant material. Clean tools with bleach (1:10). Do this weekly during outbreaks. No PPE needed, but wear gloves.',
+    'cultural_control_mulch': 'Apply 3-4 inches of organic mulch around trees, keeping 6 inches from trunk. Renew annually. Improves soil health; no chemicals.',
+    'cultural_control_drainage': 'Improve field drainage by adding channels or raised beds. Avoid overwatering. Check soil weekly.',
+    'cultural_control_gypsum': 'Apply 1-2 tons/acre to soil and incorporate. Test soil pH first; repeat every 2 years.',
+    'cultural_control_pruning': 'Prune affected branches 6 inches below symptoms. Disinfect tools between cuts. Do in dry weather.',
+    'favorable_soil_conditions': 'Ensure well-drained soil with pH 6-7. Test and amend soil before planting.',
+    'certified_disease_free_nursery_stock': 'Buy from certified nurseries. Inspect roots before planting.',
+    'resistant_rootstocks': 'Use resistant varieties like Dusa or Toro Canyon. Plant in healthy soil.',
+    'prevent_soil_movement': 'Clean equipment to avoid spreading soil. Use barriers in fields.',
+    'irrigation_management': 'Water deeply but infrequently. Use drip irrigation to avoid wet trunks.',
+    'mulch': 'Apply 4-6 inches around base, away from trunk. Renew seasonally.',
+    'gypsum': 'Apply 500-1000 lbs/acre for saline soils. Incorporate and water in.',
+    'remove_infected_trees': 'Uproot and burn infected trees. Replace with resistant stock.',
+    'disinfect_tools': 'Soak tools in 10% bleach for 5 min between uses.',
+    'stump_treatment_with_herbicide': 'Apply glyphosate to fresh stumps. Follow label for dosage.',
+    'avoid_grafting_from_infected': 'Only graft from healthy trees. Test scions if possible.',
+    'prune_dead_branches': 'Cut dead wood back to healthy tissue. Dispose properly.',
+    'optimal_irrigation': 'Water 1-2 times/week deeply. Monitor soil moisture.',
+    'fertilization': 'Apply balanced NPK fertilizer 3-4 times/year. Soil test first.',
+    'plant_mexican_rootstocks': 'Choose Mexican race rootstocks for resistance.',
+    'remove_dead_trees': 'Uproot and destroy. Solarize soil if possible.',
+    'sterilize_tools': 'Use alcohol or bleach on tools after each cut.',
+    'benomyl': 'Apply as foliar spray: 0.5-1 lb/100 gal. Every 14 days. Wear PPE.',
+    'captan': 'Apply 2-4 lb/acre foliar. Every 7-14 days. Wear PPE.',
+    'thiram': 'Apply as seed treatment or foliar: Follow label. Wear PPE.',
+    'carbendazim': 'Apply 0.5-1 g/L foliar. Repeat every 10-14 days. Wear PPE.',
+    'trifloxystrobin': 'Apply 2-4 oz/acre. Rotate with other groups. Wear PPE.',
+    'copper_fungicide': 'Apply 2-4 lb/acre foliar. Every 7 days in wet weather. Wear PPE.',
+    'sulfur': 'Apply as dust: 20-30 lb/acre. Avoid hot days. Wear PPE.',
+    'pruning': 'Thin canopy for air flow. Dispose clippings. Do annually.',
+    'resistant_varieties': 'Plant scab-resistant like Lamb Hass. Consult nursery.',
+    'avoid_overhead_irrigation': 'Use drip systems. Water at base.',
+    'copper_oxychloride': 'Apply 2-3 g/L foliar. Every 10-14 days. Wear PPE.',
+    'copper_hydroxide': 'Apply 1-2 lb/100 gal. Repeat as needed. Wear PPE.',
+    'sulfur_plus_copper_sulfate': 'Mix per label; apply foliar. Wear PPE.',
+    'control_honeydew_insects': 'Manage aphids/scale with soaps/oils.',
+    'wash_with_detergent': 'Mix mild soap; wash leaves gently. Rinse.',
+    'liquid_copper_fungicide': 'Apply diluted per label. Every 7-10 days.',
+    'selective_insecticides': 'Use targeted products like imidacloprid sparingly.',
+    'good_fertilizer': 'Apply NPK 10-5-20 at 1 lb/tree quarterly.',
+    'irrigation_practices': 'Deep water 20-30 gal/tree weekly.',
+    'prevent_stress': 'Shade young trees; mulch to retain moisture.',
+    'remove_diseased_parts': 'Cut and burn affected streaks.',
+    'high_quality_water': 'Use low-salinity water; test regularly.',
+    'cut_out_infected_tissue': 'Remove canker with sterile knife; paint wound.',
+    'potassium_phosphonate': 'Inject or drench: 1-2 qt/tree. Every 3 months.',
+    'avoid_wetting_trunks': 'Use low-angle sprinklers or drip.',
+    'good_drainage': 'Plant on mounds; add organic matter.',
+    'avoid_excess_irrigation': 'Water only when top 2 inches dry.',
+    'remove_infected_trees': 'Uproot and burn. Replace soil if possible.',
+    'remove_stumps': 'Dig out and treat with fungicide.',
+    'fumigation': 'Use methyl bromide per regulations (restricted).',
+    'air_drying_roots': 'Expose roots briefly during replanting.',
+    'potassium_bicarbonate': 'Mix 1 tbsp/gal; spray weekly. Organic.',
+    'baking_soda_solution': '1 tsp soda + soap/gal; spray every 7 days.',
+    'avoid_overhead_watering': 'Water at base to reduce humidity.',
+    'lime_sulfur': 'Apply dormant spray: Dilute per label.',
+    'remove_infested_branches': 'Prune 12 inches below infestation.',
+    'chip_wood_onsite': 'Chip and compost wood away from trees.',
+    'solarize_branches': 'Cover piles with plastic for 4-6 weeks in sun.',
+    'avoid_moving_infested_material': 'Quarantine affected areas.',
+    'tebuconazole': 'Apply 4-8 oz/acre foliar. Every 14 days.',
+    'debacarb': 'Apply per label for dieback; foliar spray.',
+    'metconazole': 'Apply 3-6 oz/acre. Rotate fungicides.'
+}
 
 #  PROPERTIES 
 irac_groups = [
@@ -230,8 +395,11 @@ if all_pests:
         
         st.write(f"**Controls for {selected_pest.replace('_', ' ').title()}:**")
         if pest_controls_result:
-    
-            controls = [{"Control Method": c[0].replace('_', ' ').title()} for c in pest_controls_result]
+            controls = []
+            for c in pest_controls_result:
+                chem = c[0]
+                instr = admin_instructions.get(chem, "Follow product label and consult a local agricultural expert for safe use.")  # Default if missing
+                controls.append({"Control Method": chem.replace('_', ' ').title(), "Instructions": instr})
             st.dataframe(controls, use_container_width=True, hide_index=True)
         else:
             st.info("No controls found in the knowledge base.")
@@ -260,8 +428,11 @@ if all_diseases:
         
         st.write(f"**Controls for {selected_disease.replace('_', ' ').title()}:**")
         if disease_controls_result:
-            #
-            controls = [{"Control Method": c[0].replace('_', ' ').title()} for c in disease_controls_result]
+            controls = []
+            for c in disease_controls_result:
+                chem = c[0]
+                instr = admin_instructions.get(chem, "Follow product label and consult a local agricultural expert for safe use.")
+                controls.append({"Control Method": chem.replace('_', ' ').title(), "Instructions": instr})
             st.dataframe(controls, use_container_width=True, hide_index=True)
         else:
             st.info("No controls found in the knowledge base.")
