@@ -1,6 +1,6 @@
 # visual.py
 import streamlit as st
-from pyDatalog import pyDatalog
+import pyDatalog
 from datalog import load_kb
 
 # ---------------- LOAD KB ----------------
