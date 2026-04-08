@@ -1,1 +1,0 @@
-// Traverse linked lists to find the smallest element
