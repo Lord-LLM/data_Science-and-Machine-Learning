@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores student information and preferences.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "preferredLanguage": { "type": "string", "enum": ["English", "Swahili", "Sheng"] },
+        "gradeLevel": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "StudySession": {
+      "title": "Study Session",
+      "description": "A record of a student's interaction with the AI tutor.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "concept": { "type": "string" },
+        "explanation": { "type": "string" },
+        "analogy": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "concept", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": {
+      "schema": "UserProfile",
+      "description": "User profile document"
+    },
+    "/sessions/{sessionId}": {
+      "schema": "StudySession",
+      "description": "Individual study sessions"
+    }
+  }
+}
