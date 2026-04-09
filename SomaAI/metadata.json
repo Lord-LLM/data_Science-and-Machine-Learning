@@ -1,5 +1,0 @@
-{
-  "name": "SomaAI",
-  "description": "Personalized STEM tutor for students using localized analogies and code-switching (English + Swahili/Sheng).",
-  "requestFramePermissions": ["camera"]
-}

@@ -1,8 +1,0 @@
-.env
-.history/
-__pycache__/
-*.pyc
-.env
-.history/
-__pycache__/
-chroma_db/
